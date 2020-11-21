@@ -49,8 +49,8 @@ public class ItemController {
      * @return list of searched items
      */
     @GetMapping("items")
-    public ResponseEntity<List<ItemDto>> listAllItemsByPage(@RequestParam("page") Integer page,
-            @RequestParam("limit") Integer limit) {
+    public ResponseEntity<List<ItemDto>> listAllItemsByPage(@Validated @RequestParam("page") Integer page,
+            @Validated @RequestParam("limit") Integer limit) {
         if (page == null || page < 0 || limit == null || limit == 0) {
 
         }

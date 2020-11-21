@@ -14,6 +14,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ * @author lvdo
+ *
+ */
 @Getter
 @Setter
 @MappedSuperclass
@@ -27,7 +32,7 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", columnDefinition = "serial")
+    @Column(name = "id")
     private Long id;
 
 }

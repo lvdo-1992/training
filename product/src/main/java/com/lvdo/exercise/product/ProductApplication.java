@@ -3,6 +3,11 @@ package com.lvdo.exercise.product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 
+ * @author lvdo
+ *
+ */
 @SpringBootApplication
 public class ProductApplication {
 

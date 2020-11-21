@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.lvdo.exercise.product.entity.PurchaseEntity;
 
+/**
+ * 
+ * @author lvdo
+ *
+ */
 @Repository
 public interface PurchaseRepo extends CrudRepository<PurchaseEntity, Long> {
 

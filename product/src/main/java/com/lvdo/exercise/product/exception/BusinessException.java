@@ -1,5 +1,10 @@
 package com.lvdo.exercise.product.exception;
 
+/**
+ * 
+ * @author lvdo
+ *
+ */
 public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,37 @@
 package com.lvdo.exercise.product.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import com.lvdo.exercise.product.dto.PurchaseDto;
+import com.lvdo.exercise.product.service.PurchaseService;
+
+/**
+ * 
+ * @author lvdo
+ *
+ */
+@RestController
 public class PurchaseController {
+
+    @Autowired
+    private PurchaseService purchaseService;
+
+    /**
+     * API for buying a item
+     * 
+     * @param itemId   item id
+     * @param quantity quantity of buying item
+     * @return bought item
+     */
+    @PostMapping("buy/{item_id}")
+    public ResponseEntity<PurchaseDto> buyItem(@PathVariable("item_id") Long itemId, @RequestBody Integer quantity) {
+        return new ResponseEntity<PurchaseDto>(purchaseService.buyItem(itemId, quantity), HttpStatus.CREATED);
+    }
 
 }

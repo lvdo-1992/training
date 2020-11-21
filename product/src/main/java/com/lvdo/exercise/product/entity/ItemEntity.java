@@ -1,9 +1,13 @@
 package com.lvdo.exercise.product.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,12 +26,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class ItemEntity extends BaseEntity {
+public class ItemEntity implements Serializable {
 
     /**
      * 
      */
     private static final long serialVersionUID = 7139273723170544512L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "total_stock_value")
     private Integer totalStockValue;

@@ -1,28 +1,27 @@
 package com.lvdo.exercise.product.exception;
 
+import org.springframework.http.HttpStatus;
+
+import com.lvdo.exercise.product.message.Message;
+
+import lombok.Getter;
+
 /**
  * 
  * @author lvdo
  *
  */
+@Getter
 public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private final String message;
-    private final String[] args;
+    private Message msg;
+    private HttpStatus code;
 
-    public BusinessException(String message, String... args) {
-        this.message = message;
-        this.args = args;
+    public BusinessException(Message message, HttpStatus httpStatus) {
+        this.msg = message;
+        this.code = httpStatus;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
-    public String[] getArgs() {
-        return args;
-    }
 }

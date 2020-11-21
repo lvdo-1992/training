@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvdo.exercise.product.dto.ItemDto;
+import com.lvdo.exercise.product.exception.BusinessException;
+import com.lvdo.exercise.product.message.Message;
 import com.lvdo.exercise.product.service.ItemService;
 
 /**
@@ -35,10 +37,12 @@ public class ItemController {
      */
     @PostMapping("items")
     public ResponseEntity<ItemDto> createItem(@Validated @RequestBody ItemDto dto) {
-        if (!Objects.isNull(dto)) {
+        if (Objects.nonNull(dto) && Objects.nonNull(dto.getTotalStockValue())
+                && Objects.nonNull(dto.getSellingPrice())) {
             return new ResponseEntity<ItemDto>(itemService.createItem(dto), HttpStatus.CREATED);
+        } else {
+            throw new BusinessException(Message.ERROR_REQUEST, HttpStatus.PRECONDITION_REQUIRED);
         }
-        return new ResponseEntity<ItemDto>(HttpStatus.OK);
     }
 
     /**
@@ -52,7 +56,7 @@ public class ItemController {
     public ResponseEntity<List<ItemDto>> listAllItemsByPage(@Validated @RequestParam("page") Integer page,
             @Validated @RequestParam("limit") Integer limit) {
         if (page == null || page < 0 || limit == null || limit == 0) {
-
+            throw new BusinessException(Message.ERROR_PAGE_PARAM, HttpStatus.PRECONDITION_REQUIRED);
         }
         return new ResponseEntity<List<ItemDto>>(itemService.listAllItems(page, limit), HttpStatus.OK);
     }

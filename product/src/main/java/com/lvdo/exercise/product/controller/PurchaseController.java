@@ -1,5 +1,7 @@
 package com.lvdo.exercise.product.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvdo.exercise.product.dto.PurchaseDto;
+import com.lvdo.exercise.product.exception.BusinessException;
+import com.lvdo.exercise.product.message.Message;
 import com.lvdo.exercise.product.service.PurchaseService;
 
 /**
@@ -33,6 +37,9 @@ public class PurchaseController {
     @PostMapping("buy/{item_id}")
     public ResponseEntity<PurchaseDto> buyItem(@Validated @PathVariable("item_id") Long itemId,
             @Validated @RequestBody(required = true) PurchaseDto purchaseDto) {
+        if (Objects.isNull(purchaseDto) || Objects.isNull(purchaseDto.getQuantity())) {
+            throw new BusinessException(Message.ERROR_REQUEST, HttpStatus.PRECONDITION_REQUIRED);
+        }
         Integer quantity = purchaseDto.getQuantity();
         return new ResponseEntity<PurchaseDto>(purchaseService.buyItem(itemId, quantity), HttpStatus.CREATED);
     }

@@ -44,7 +44,7 @@ public class ItemEntity implements Serializable {
     @Column(name = "current_stock_value")
     private Integer currentStockValue;
 
-    @Column(name = "selling_price")
+    @Column(name = "selling_price", columnDefinition = "Decimal(10,2) default '0.00'")
     private Double sellingPrice;
 
     @Column(name = "place_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

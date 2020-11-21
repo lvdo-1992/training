@@ -34,6 +34,7 @@ public class ItemService {
     public ItemDto createItem(ItemDto dto) {
         ItemEntity entity = mapperUtil.convertToEntity(dto, ItemEntity.class);
         entity.setCurrentStockValue(entity.getTotalStockValue());
+        entity.setSellingPrice(Double.parseDouble(String.format("%.2f", entity.getSellingPrice())));
         entity.setPlaceAt(new Date());
 
         ItemEntity savedData = itemRepo.save(entity);

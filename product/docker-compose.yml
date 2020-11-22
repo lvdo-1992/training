@@ -1,11 +1,12 @@
 version: "3"
 services:
   product:
-    image: product-jpa
+    image: product
     ports:
       - "8080:8080"
     networks:
       - product-mysql
+    restart: on-failure
     depends_on:
       - mysqldb
  
@@ -16,6 +17,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123@Toor
       - MYSQL_DATABASE=product
+    healthcheck:
+      test: ["CMD-SHELL", 'mysqladmin ping -uroot -p123@Toor']
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 networks:
   product-mysql:

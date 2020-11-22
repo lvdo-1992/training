@@ -7,5 +7,5 @@ Your task here is to implement three endpoints to list/place/buy items.
 
 # Step to build and deploy project
 1. Build source code by maven tool "mvn clean install"
-2. Run ./start.sh to start the server
+2. Run ./start.sh to start the server (depend on your permission of docker, use sudo)
 3. Server automatic start on port 8080

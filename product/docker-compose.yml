@@ -1,0 +1,21 @@
+version: "3"
+services:
+  product:
+    image: product-jpa
+    ports:
+      - "8080:8080"
+    networks:
+      - product-mysql
+    depends_on:
+      - mysqldb
+ 
+  mysqldb:
+    image: mysql:8
+    networks:
+      - product-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123@Toor
+      - MYSQL_DATABASE=product
+
+networks:
+  product-mysql:
